@@ -46,10 +46,15 @@ function getBorrowersForBook(book, accounts) {
   
   const borrowers = [];
   
+  // Helper function that finds account and gets called again below 
+  function getAccountById(accounts, id) {
+    return accounts.find(account => account.id === id);
+  }
+  
   // Iterates over each borrow object in the book's borrows array and finds the corresponding account object in the accounts array.
   // Combines the borrow object and account object into a single object and adds it to the borrowers array.
   for (let borrow of book.borrows){
-    const account = accounts.find(acc => acc.id === borrow.id);
+    const account = getAccountById(accounts, borrow.id);
     const borrower = {...borrow, ...account};
     borrowers.push(borrower);
   }
