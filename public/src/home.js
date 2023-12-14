@@ -38,13 +38,19 @@ function getBooksBorrowedCount(books) {
 
 // This function takes an array of book objects as input and returns an array of the top 5 most common genres in the array.
 function getMostCommonGenres(books) {
+  // Define your helper function
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   // Uses the reduce method to create an object that counts the number of books for each genre.
   const genreCounts = books.reduce((acc, {genre}) => {acc[genre] = (acc[genre] || 0) + 1; return acc;}, {});
-// Uses the Object.entries method to convert the object into an array of key-value pairs, sorts the array by the count value in descending order, and returns the top 5 genres as an array of objects with name and count properties.
+
+  // Uses the Object.entries method to convert the object into an array of key-value pairs, sorts the array by the count value in descending order, and returns the top 5 genres as an array of objects with name and count properties.
   const sortedGenres = Object.entries(genreCounts)
     .sort(([, countA], [, countB]) => countB - countA)
     .slice(0, 5)
-    .map(([name, count]) => ({name, count}));
+    .map(([name, count]) => ({name: capitalizeFirstLetter(name), count}));
 
   return sortedGenres;
 }
