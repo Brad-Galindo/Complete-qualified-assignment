@@ -38,7 +38,7 @@ function getBooksBorrowedCount(books) {
 
 // This function takes an array of book objects as input and returns an array of the top 5 most common genres in the array.
 function getMostCommonGenres(books) {
-  // Define your helper function
+  // Helper function that capiralizes the first letter of the string
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
